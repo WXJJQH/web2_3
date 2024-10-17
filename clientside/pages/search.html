@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/search.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="nav-item"><a href="/">Main</a></div>
+            <div class="nav-item"><a href="/search_page" style="color: aqua;">Search</a></div>
+            <h3 style="margin-left: 270px;">Welcome to Heart2Heart!</h3>
+        </div>
+        <div class="content">
+            <div class="search">
+                <input type="text" id="keyword" value="">
+                <button id="search">search</button>
+                <div></div>
+                All<input type="radio" name="type" id="" value="0" class="type">
+                Money<input type="radio" name="type" id="" value="1" class="type">
+                Item<input type="radio" name="type" id="" value="2" class="type">
+                <div style="margin-left: 25px;">
+                    New York<input type="radio" name="city" id="" value="New York" class="type">
+                    Chicago<input type="radio" name="city" id="" value="Chicago" class="type">
+                    Los Angeles<input type="radio" name="city" id="" value="Los Angeles" class="type">
+                </div>
+                <button id="clear" style="background-color: antiquewhite;" onclick="clear">clear</button>
+            </div>
+            <div class="main-content">
+                <div class="Items">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('search').addEventListener('click', () => {
+            let keyword = document.getElementById('keyword').value
+            var radios = document.getElementsByName('type');
+            let cities = document.getElementsByName('city')
+            let type = 0
+            let city = ''
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    // 找到被选中的单选框，获取其value
+                    type = radios[i].value;
+                    break; // 找到后退出循环
+                }
+            }
+            for (var i = 0; i < cities.length; i++) {
+                if (cities[i].checked) {
+                    // 找到被选中的单选框，获取其value
+                    city = cities[i].value;
+                    break; // 找到后退出循环
+                }
+            }
+            console.log(keyword, type, city)
+            var xhr = new XMLHttpRequest(); // 创建新的XMLHttpRequest对象
+            xhr.open("GET", "http://127.0.0.1:5000/search?keyword=" + keyword + "&type=" + type + '&city=' + city, true); // 设置请求方法和URL，设置为异步模式
+            xhr.onreadystatechange = function () { // 设置事件处理器来监听响应状态变化
+                if (xhr.readyState === 4 && xhr.status === 200) { // 当响应状态变为4且状态码为200时，表示请求成功完成
+                    let data = JSON.parse(xhr.responseText)
+                    console.log(data)
+                    document.querySelector(".Items").innerHTML = ''
+                    if (data[0]) {
+                        data.forEach(item => {
+                            document.querySelector('.Items').innerHTML += `
+                                <a href="/details?id=${item.FUNDRAISER_ID}" class="item">
+                                    <div>ID: <span style="color: skyblue;">${item.FUNDRAISER_ID}</span></div>
+                                    <div>Organizer: <span style="color: skyblue;">${item.ORGANIZER}</span></div>
+                                    <div>Target Funding: <span style="color: skyblue;">${item.TARGET_FUNDING}</span></div>
+                                    <div>City: <span style="color: skyblue;">${item.CITY}</span></div>
+                                </a>
+                            `
+                        })
+                    } else {
+                        document.querySelector('.Items').innerHTML = 'No search results'
+                    }
+                    document.getElementById('keyword').value = ''
+                }
+            };
+            xhr.send(); // 发送请求，对于GET请求，这里传递null作为参数（虽然不是必需的）
+        })
+
+        const clear = () => {
+            let radios = document.querySelectorAll('input[type="radio"]')
+            console.log(111)
+            radios.forEach(item => {
+                item.checked = false
+            })
+        }
+        document.getElementById('clear').addEventListener('click', clear)
+    </script>
+</body>
+
+</html>
