@@ -1,0 +1,117 @@
+.search{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+}
+#keyword{
+    width: 18vw;
+    height: 5vh;
+}
+button{
+    height: 5vh;
+    width: 5vw;
+    margin-left: 1vw;
+    background-color: aquamarine;
+    border-radius: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+button:active{
+    background-color: rgb(145, 145, 236);
+}
+select{
+    margin-left: 10px;
+}
+.main-content{
+    width: 80%;
+    margin: 10px auto;
+}
+img{
+    width: 100%;
+}
+.type{
+    margin-right: 6px;
+}
+.Content{
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+.Items{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.item{
+    width: 30%;
+    height: 30vh;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 5px 5px 15px #767575;
+    transition: all .1s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding-left: 10px;
+    background-color: #fff;
+}
+.item:hover{
+    transform: scale(1.03);
+}
+.edit{
+    width: 30vw;
+    height: 20vw;
+    background-color: #fff;
+    box-shadow: 5px 5px 15px #767575;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10%;
+    padding: 3% 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    z-index: 999;
+    display: none;
+}
+.add{
+    width: 30vw;
+    height: 20vw;
+    background-color: #fff;
+    box-shadow: 5px 5px 15px #767575;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10%;
+    padding: 3% 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    z-index: 999;
+    display: none;
+}
+.edit div input, .add div input{
+    margin-left: 2px;
+    border: 1px solid #ccc;
+}
+.edit .close, .add .Close{
+    position: absolute;
+    top: 1vw;
+    right: 1vw;
+}
+.edit .confirm, .add .AddConfirm{
+    position: absolute;
+    bottom: 1vw;
+    right: 1vw;
+}
+.zhaozi{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+}

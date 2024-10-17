@@ -1,0 +1,31 @@
+th, td{
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    margin: 0;
+}
+table{
+    margin: 10px auto;
+}
+.items{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.item{
+    width: 30%;
+    height: 30vh;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 5px 5px 15px #767575;
+    transition: all .1s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding-left: 10px;
+    background-color: #fff;
+}
+.item:hover{
+    transform: scale(1.03);
+}
