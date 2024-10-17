@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="nav-item"><a href="/" style="color: aqua;">Main</a></div>
+            <div class="nav-item"><a href="/search_page">Search</a></div>
+            <h3 style="margin-left: 270px;">Welcome to Heart2Heart!</h3>
+        </div>
+        <div class="content">
+            <div class="text" style="padding: 0 5%;padding-top: 10px; line-height: 25px; font-size: 17px;">
+                Welcome to Heart2Heart!
+                At Heart2Heart, we champion the belief that every story deserves to be heard and every dream has the
+                potential to come to fruition. Our mission is to cultivate a fair, transparent, and efficient
+                crowdfunding environment for individuals grappling with financial challenges. Whether you’re seeking
+                medical assistance, educational opportunities, or aiming to advance social welfare projects, we are here
+                to offer support and guidance.
+                Every campaign on our platform undergoes a rigorous review process to ensure its authenticity and
+                viability. This safeguard not only protects our campaigners but also instills confidence in our
+                supporters, fostering a foundation of trust that can genuinely transform lives.
+                As a community-driven platform, we wholeheartedly encourage active participation. Whether you wish to
+                launch a campaign or support the aspirations of others, your involvement is crucial to our collective
+                progress. We invite you to explore our projects and discover the inspiring stories of individuals and
+                teams striving for a better future. Every contribution you make has a significant, positive impact.
+                Thank you for choosing Heart2Heart. We are excited to collaborate with you in forging a brighter
+                tomorrow!
+            </div>
+            <!-- <table cellspacing="0">
+                <tr>
+                    <th>id</th>
+                    <th>organizer</th>
+                    <th>target funding</th>
+                    <th>city</th>
+                    <th>check</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Jack</td>
+                    <td>children</td>
+                    <td>New York</td>
+                    <td><a href="/" style="color: skyblue;">detail</a></td>
+                </tr>
+            </table> -->
+            <div class="items">
+                <!-- <a href="" class="item">
+                    <div>ID: </div>
+                    <div>Organizer: </div>
+                    <div>Target Funding: </div>
+                    <div>City</div>
+                </a> -->
+            </div>
+        </div>
+    </div>
+    <script>
+        var xhr = new XMLHttpRequest(); // 创建新的XMLHttpRequest对象
+        xhr.open("GET", "http://127.0.0.1:5000/get_fundraiser", true); // 设置请求方法和URL，设置为异步模式
+        xhr.onreadystatechange = function () { // 设置事件处理器来监听响应状态变化
+            if (xhr.readyState === 4 && xhr.status === 200) { // 当响应状态变为4且状态码为200时，表示请求成功完成
+                let data = JSON.parse(xhr.responseText)
+                data.forEach(item => {
+                    document.querySelector('.items').innerHTML += `
+                        <a href="/details?id=${item.FUNDRAISER_ID}" class="item">
+                            <div>ID: <span style="color: skyblue;">${item.FUNDRAISER_ID}</span></div>
+                            <div>Organizer: <span style="color: skyblue;">${item.ORGANIZER}</span></div>
+                            <div>Target Funding: <span style="color: skyblue;">${item.TARGET_FUNDING}</span></div>
+                            <div>City: <span style="color: skyblue;">${item.CITY}</span></div>
+                        </a>
+                    `
+                })
+            }
+        };
+        xhr.send(); // 发送请求，对于GET请求，这里传递null作为参数（虽然不是必需的）
+    </script>
+</body>
+
+</html>
